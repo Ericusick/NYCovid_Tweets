@@ -31,4 +31,66 @@ NLP needed to be done to the tweets data before it can be used to model. Some of
 After taking care of the text data, we will Covid cases data from NYC. Luckily The New York Times provide such dataset for anyone to use and is constantly update new reports nationwide. The dataset provide by [NYTimes](https://github.com/nytimes/covid-19-data) was modify to be new cases only found in New York City since that what we were most interested in. 
 
 A graph of new Covid cases found in NYC:
-![](Images/New Cases Graph.PNG)
+![](Images/new_cases_graph.PNG)
+
+# Modeling Process
+Created two slightly different dataset for modeling, one that is the original data with count vectorizer. Another one where is the same as the original with one exception, it utilize the number of likes within a tweet to give more weight/value to the words. The idea is if there a tweet that someone liked, it shows that they are in agreement with the said tweet and are more likely to be influence by the tweet. 
+
+Random Forest Regressor was used as the final model. GridSearchCV was used to find the best models within the given parameters, below are the feature importances graph of the original dataset and the likes count dataset.
+
+Original:
+
+![](Images/originial_fi.PNG)
+
+Likes Count:
+
+![](Images/likes_fi.PNG)
+
+# Results
+Here is the results as well for both models.
+
+Original:
+- Training R2: 0.61
+- Test R2: 0.28
+- Train RMSE: 1308.28
+- Test RMSE: 1593.89
+
+Likes:
+- Training R2: 0.52
+- Testing R2: 0.27
+- Train RMSE:1437.65
+- Test RMSE: 1606.66
+
+Here we can see that the Original preform better than the Likes, the reason being why is there is a greater chance of outliers found within the Likes due to some 20,000 likes on a single tweets over many averaging 100 likes skewing the model. Ideally for both models the closer to 1.00 in the R2 the better and the smaller the number for RMSE the better the overall model preformance. 
+
+# Post EDA
+These are visuals of some of the higher ranking words found in the feature importances of both models to get a better idea of correlation and trends.
+
+Coronavirus:
+
+![](Images/trend_coronavirus.PNG)
+
+New:
+
+![](Images/trend_new.PNG)
+
+Quarantine:
+
+![](Images/trend_quarantine.PNG)
+
+Vaccine:
+
+![](Images/trend_vaccine.PNG)
+
+# Conclusion
+After a closer look at the feature importance graphs, there seems to be a decent amount of heatlh buzz words and some political words that correlate with new Covid cases within New York City. The verified user whenever they tweet on Twitter should be aware of what they are tweeting to their followers, as their message does have the potential to influence the behaviors of their readers. 
+
+# Future Works
+- Obtain more tweets to work with
+- Further cleaning of NLP
+  - Including more stopwords
+  - Possible removing the keywords used for gathering tweets to get rid of potential bias
+  - Placing language filter to keep it English only for modeling
+- Create bi-gram or n-gram datasets
+- Create smaller windows of time. For example looking at tweets and cases in a 3 month window, a snapshot.
+- Create more paramters for GridSearchCV to go through to create better models
