@@ -31,3 +31,4 @@ NLP needed to be done to the tweets data before it can be used to model. Some of
 After taking care of the text data, we will Covid cases data from NYC. Luckily The New York Times provide such dataset for anyone to use and is constantly update new reports nationwide. The dataset provide by [NYTimes](https://github.com/nytimes/covid-19-data) was modify to be new cases only found in New York City since that what we were most interested in. 
 
 A graph of new Covid cases found in NYC:
+![](Images/New Cases Graph.PNG)
